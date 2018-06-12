@@ -1,0 +1,20 @@
+{
+  "name": "isk-brkr",
+  "private": true,
+  "version": "0.0.1",
+  "description": "",
+  "author": "yhiguchi@uhuru.jp",
+  "scripts": {
+    "start": "node ./node_modules/node-red/red.js -u ./nodered"
+  },
+  "dependencies": {
+    "node-red": "^0.18.6",
+    "node-red-contrib-influxdb": "~0.2.1",
+    "node-red-contrib-postgres": "~0.6.1",
+    "node-red-node-geohash": "~0.1.9",
+    "node-red-node-random": "~0.1.0",
+    "node-red-contrib-aws-sdk-anything": "~0.2.1"
+  },
+  "devDependencies": {
+  }
+}
