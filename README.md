@@ -1,6 +1,6 @@
 # isk-brkr
 
-## command
+## docker run
 
 ```
 docker build -t isk/isk-broker .
