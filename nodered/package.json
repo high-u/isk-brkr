@@ -13,7 +13,8 @@
     "node-red-contrib-postgres": "~0.6.1",
     "node-red-node-geohash": "~0.1.9",
     "node-red-node-random": "~0.1.0",
-    "node-red-contrib-aws-sdk-anything": "~0.2.1"
+    "node-red-contrib-aws-sdk-anything": "~0.2.1",
+    "node-red-contrib-http-request": "~0.1.13"
   },
   "devDependencies": {
   }
