@@ -10,5 +10,5 @@ COPY ./nodered/flows.json /src/nodered/flows.json
 # Bundle app source
 COPY ./nodered/settings.js /src/nodered/settings.js
 
-EXPOSE 3000
+EXPOSE 1880
 CMD cd /src; npm start
