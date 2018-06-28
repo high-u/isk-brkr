@@ -1,13 +1,13 @@
 [
     {
-        "id": "7583fe25.07e35",
+        "id": "e7f59f82.7ce1c",
         "type": "tab",
         "label": "API-Stream-JSON",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "3bdd7169.8f727e",
+        "id": "1b973239.161ece",
         "type": "tab",
         "label": "API-Upload-Binary",
         "disabled": false,
@@ -21,9 +21,9 @@
         "region": "ap-northeast-1"
     },
     {
-        "id": "f9509aab.b5a348",
+        "id": "557463a6.07eb4c",
         "type": "debug",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "",
         "active": false,
         "tosidebar": true,
@@ -35,9 +35,9 @@
         "wires": []
     },
     {
-        "id": "cede21a.782efe",
+        "id": "d5841c90.823ff",
         "type": "http in",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "",
         "url": "/v1/stream/json",
         "method": "post",
@@ -47,16 +47,16 @@
         "y": 128,
         "wires": [
             [
-                "2f54f60d.c145ba",
-                "f9509aab.b5a348",
-                "2f9dfce3.2963c4"
+                "7f39a0b2.576fa",
+                "557463a6.07eb4c",
+                "a9bd06fe.8ab5b8"
             ]
         ]
     },
     {
-        "id": "74e544b4.82986c",
+        "id": "e52a7442.9eab98",
         "type": "comment",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "Real Time API",
         "info": "",
         "x": 118,
@@ -64,9 +64,9 @@
         "wires": []
     },
     {
-        "id": "2f54f60d.c145ba",
+        "id": "7f39a0b2.576fa",
         "type": "http response",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -75,9 +75,9 @@
         "wires": []
     },
     {
-        "id": "6339f5ea.52410c",
+        "id": "2296a90b.e6b316",
         "type": "function",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "transform",
         "func": "var paramsFirehose = {};\nparamsFirehose.payload = {\n  DeliveryStreamName: msg.deliveryStreamName,\n  Record: {Data: JSON.stringify(msg.payload) + \"\\n\"}  // \\n : for athena\n};\n\nreturn paramsFirehose;\n",
         "outputs": 1,
@@ -86,14 +86,14 @@
         "y": 336,
         "wires": [
             [
-                "83b354f6.76cf88"
+                "d135b28e.e9921"
             ]
         ]
     },
     {
-        "id": "b49ed9b9.85edc8",
+        "id": "82c405d0.28c168",
         "type": "debug",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "",
         "active": false,
         "tosidebar": true,
@@ -105,9 +105,9 @@
         "wires": []
     },
     {
-        "id": "bc0b1ebf.0d579",
+        "id": "33c2866b.603f9a",
         "type": "comment",
-        "z": "3bdd7169.8f727e",
+        "z": "1b973239.161ece",
         "name": "Batch API",
         "info": "",
         "x": 140,
@@ -115,9 +115,9 @@
         "wires": []
     },
     {
-        "id": "319d53a8.9ed10c",
+        "id": "ab928214.dba5c",
         "type": "http in",
-        "z": "3bdd7169.8f727e",
+        "z": "1b973239.161ece",
         "name": "",
         "url": "/v1/upload/binary",
         "method": "post",
@@ -127,45 +127,45 @@
         "y": 144,
         "wires": [
             [
-                "c7cfb41a.a72468",
-                "522e18df.daf638"
+                "f401e040.ed089",
+                "9ff07f4a.11175"
             ]
         ]
     },
     {
-        "id": "5d97ceb8.cfc21",
+        "id": "ca29a21f.621f8",
         "type": "debug",
-        "z": "3bdd7169.8f727e",
+        "z": "1b973239.161ece",
         "name": "",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 898,
+        "x": 962,
         "y": 256,
         "wires": []
     },
     {
-        "id": "1307564a.6e329a",
+        "id": "9bc86b0a.70e678",
         "type": "function",
-        "z": "3bdd7169.8f727e",
+        "z": "1b973239.161ece",
         "name": "make params",
         "func": "var base64data = msg.req.files[0].buffer;\n\nmsg.payload = {\n    Bucket: msg.binaryBucketName,\n    Key: msg.req.files[0].originalname,\n    Body: base64data,\n    ContentType: msg.req.files[0].mimetype,\n    ContentLength: base64data.length //,\n    // ContentEncoding: 'base64',\n}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 528,
+        "x": 592,
         "y": 256,
         "wires": [
             [
-                "acb39069.97b1c"
+                "4d2c0dc3.d96624"
             ]
         ]
     },
     {
-        "id": "c7cfb41a.a72468",
+        "id": "f401e040.ed089",
         "type": "http response",
-        "z": "3bdd7169.8f727e",
+        "z": "1b973239.161ece",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -174,9 +174,9 @@
         "wires": []
     },
     {
-        "id": "83b354f6.76cf88",
+        "id": "d135b28e.e9921",
         "type": "aws-sdk-anything",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "aws": "1cd6cc46.11b024",
         "region": "",
         "servicename": "Firehose",
@@ -187,50 +187,50 @@
         "y": 336,
         "wires": [
             [
-                "b49ed9b9.85edc8"
+                "82c405d0.28c168"
             ]
         ]
     },
     {
-        "id": "acb39069.97b1c",
+        "id": "4d2c0dc3.d96624",
         "type": "aws-sdk-anything",
-        "z": "3bdd7169.8f727e",
+        "z": "1b973239.161ece",
         "aws": "1cd6cc46.11b024",
         "region": "",
         "servicename": "S3",
         "methodname": "putObject",
         "name": "",
-        "x": 730,
+        "x": 794,
         "y": 256,
         "wires": [
             [
-                "5d97ceb8.cfc21"
+                "ca29a21f.621f8"
             ]
         ]
     },
     {
-        "id": "f4fe68a9.bb7f98",
+        "id": "c6181c22.9c2f2",
         "type": "batch",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "batch",
         "mode": "interval",
         "count": 10,
         "overlap": 0,
-        "interval": "6",
+        "interval": "10",
         "allowEmptySequence": false,
         "topics": [],
         "x": 418,
         "y": 448,
         "wires": [
             [
-                "62dbdaa9.940604"
+                "5cb91133.06a68"
             ]
         ]
     },
     {
-        "id": "62dbdaa9.940604",
+        "id": "5cb91133.06a68",
         "type": "join",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "join",
         "mode": "auto",
         "build": "string",
@@ -251,14 +251,14 @@
         "y": 448,
         "wires": [
             [
-                "5d2fef82.9fbae"
+                "58d3ae4.703595"
             ]
         ]
     },
     {
-        "id": "f652b909.506c28",
+        "id": "e7c087a4.e745b8",
         "type": "aws-sdk-anything",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "aws": "1cd6cc46.11b024",
         "region": "",
         "servicename": "Lambda",
@@ -269,14 +269,14 @@
         "y": 448,
         "wires": [
             [
-                "9668e373.0290b"
+                "78cf9fcf.b8d86"
             ]
         ]
     },
     {
-        "id": "9668e373.0290b",
+        "id": "78cf9fcf.b8d86",
         "type": "debug",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "",
         "active": false,
         "tosidebar": true,
@@ -288,9 +288,9 @@
         "wires": []
     },
     {
-        "id": "5d2fef82.9fbae",
+        "id": "58d3ae4.703595",
         "type": "function",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "transform",
         "func": "var params = {\n  ClientContext: \"MyApp\", \n  FunctionName: msg.streamFunctionName, \n  InvocationType: \"Event\", \n  LogType: \"Tail\", \n  Payload: JSON.stringify(msg.payload)\n};\n\nmsg.payload = params;\nreturn msg;",
         "outputs": 1,
@@ -299,14 +299,14 @@
         "y": 448,
         "wires": [
             [
-                "f652b909.506c28"
+                "e7c087a4.e745b8"
             ]
         ]
     },
     {
-        "id": "52ba2307.61ccdc",
+        "id": "a46f21ce.3dfd3",
         "type": "comment",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "TEST",
         "info": "",
         "x": 114,
@@ -314,9 +314,9 @@
         "wires": []
     },
     {
-        "id": "d4dd0290.8e68a",
+        "id": "37751cc4.4be914",
         "type": "comment",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "for firehose",
         "info": "",
         "x": 428,
@@ -324,9 +324,9 @@
         "wires": []
     },
     {
-        "id": "580ccc4e.4a5134",
+        "id": "386e2738.82f438",
         "type": "comment",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "for enebular lambda",
         "info": "",
         "x": 458,
@@ -334,9 +334,9 @@
         "wires": []
     },
     {
-        "id": "4e2732d0.201f6c",
+        "id": "5895bf67.262e7",
         "type": "www-request",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "call influxdb api",
         "method": "POST",
         "ret": "txt",
@@ -347,14 +347,14 @@
         "y": 224,
         "wires": [
             [
-                "5073403b.5e5a3"
+                "4135c7a2.80db48"
             ]
         ]
     },
     {
-        "id": "5073403b.5e5a3",
+        "id": "4135c7a2.80db48",
         "type": "debug",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "",
         "active": false,
         "tosidebar": true,
@@ -366,9 +366,9 @@
         "wires": []
     },
     {
-        "id": "fcbc6146.005e9",
+        "id": "7deb312e.7a4ce",
         "type": "function",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "transform",
         "func": "var time = new Date().getTime();\n\nvar obj = JSON.parse(msg.payload);\nvar fields = \"\";\nvar tags = \"\";\nvar delim = \"\";\nfor (let k in obj) {\n  let v = obj[k];\n  if (typeof v === \"string\") {\n    tags += `,${k}=${v}`;\n  } else {\n    fields += `${delim}${k}=${v}`;\n    delim = \",\";\n  }\n}\n\nvar series = \"devices\";\n\nmsg.payload = `${series}${tags} ${fields} ${time}`;\nmsg.headers = {\"content-type\": \"application/octet-stream\"};\nmsg.url = msg.influxdbApiWriteUrl;\nreturn msg;",
         "outputs": 1,
@@ -377,14 +377,14 @@
         "y": 224,
         "wires": [
             [
-                "4e2732d0.201f6c"
+                "5895bf67.262e7"
             ]
         ]
     },
     {
-        "id": "8011ee26.798b9",
+        "id": "e73bb2a8.62e37",
         "type": "comment",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "for influxdb",
         "info": "",
         "x": 428,
@@ -392,9 +392,9 @@
         "wires": []
     },
     {
-        "id": "8591a663.c034f8",
+        "id": "23742280.e5f4ae",
         "type": "inject",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "",
         "topic": "",
         "payload": "",
@@ -407,14 +407,14 @@
         "y": 560,
         "wires": [
             [
-                "eef7ec0.4c81118"
+                "d06e5518.f37fd8"
             ]
         ]
     },
     {
-        "id": "3c3a4bf6.00b0d4",
+        "id": "d2581ef3.afe97",
         "type": "template",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "",
         "field": "payload",
         "fieldType": "msg",
@@ -426,14 +426,14 @@
         "y": 720,
         "wires": [
             [
-                "37ce9f38.7222"
+                "89fda7a4.068448"
             ]
         ]
     },
     {
-        "id": "c3dde490.9a9588",
+        "id": "f58b54e.ca6bfa8",
         "type": "function",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "",
         "func": "var t = new Date().getTime();\nmsg.value = Number(String(t).slice(8, -1)) / 100 + 20;\nmsg.url = \"https://broker.piyopiyo.takeiteasy.link\";\nreturn msg;",
         "outputs": 1,
@@ -442,14 +442,14 @@
         "y": 672,
         "wires": [
             [
-                "3c3a4bf6.00b0d4"
+                "d2581ef3.afe97"
             ]
         ]
     },
     {
-        "id": "37ce9f38.7222",
+        "id": "89fda7a4.068448",
         "type": "http request",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "",
         "method": "POST",
         "ret": "txt",
@@ -459,14 +459,14 @@
         "y": 688,
         "wires": [
             [
-                "4478f695.9b8ab8"
+                "9d53b1c.2a8f95"
             ]
         ]
     },
     {
-        "id": "4478f695.9b8ab8",
+        "id": "9d53b1c.2a8f95",
         "type": "debug",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -478,9 +478,9 @@
         "wires": []
     },
     {
-        "id": "e383e3ba.31052",
+        "id": "ab3b3bc8.d99148",
         "type": "http in",
-        "z": "3bdd7169.8f727e",
+        "z": "1b973239.161ece",
         "name": "",
         "url": "/test/upload/binary",
         "method": "get",
@@ -490,14 +490,14 @@
         "y": 368,
         "wires": [
             [
-                "3c954ed4.32bcc2"
+                "d38f01bf.00fda"
             ]
         ]
     },
     {
-        "id": "a95f3d9e.c3962",
+        "id": "312ecd21.e0f082",
         "type": "template",
-        "z": "3bdd7169.8f727e",
+        "z": "1b973239.161ece",
         "name": "",
         "field": "payload",
         "fieldType": "msg",
@@ -508,23 +508,23 @@
         "y": 368,
         "wires": [
             [
-                "97f9fe5e.dbad2"
+                "2c1471a.356b08e"
             ]
         ]
     },
     {
-        "id": "97f9fe5e.dbad2",
+        "id": "2c1471a.356b08e",
         "type": "http response",
-        "z": "3bdd7169.8f727e",
+        "z": "1b973239.161ece",
         "name": "",
         "x": 802,
         "y": 368,
         "wires": []
     },
     {
-        "id": "59b5d2fc.62e42c",
+        "id": "639b48e5.469ce8",
         "type": "comment",
-        "z": "3bdd7169.8f727e",
+        "z": "1b973239.161ece",
         "name": "TEST",
         "info": "",
         "x": 130,
@@ -532,9 +532,9 @@
         "wires": []
     },
     {
-        "id": "ad833357.55651",
+        "id": "f1b4f29.1c3d81",
         "type": "inject",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "",
         "topic": "",
         "payload": "35.627639,139.73652",
@@ -547,14 +547,14 @@
         "y": 576,
         "wires": [
             [
-                "50558231.d94eac"
+                "c7b89ac4.6d9ec8"
             ]
         ]
     },
     {
-        "id": "dc15fa0a.26ee48",
+        "id": "33768eb4.6e8932",
         "type": "function",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "",
         "func": "var t = new Date().getTime();\nmsg.payload = {\n    time: t,\n    geohash: msg.payload,\n    hostname: \"local\",\n    location: \"Tokyo\",\n    value: 6\n}\nreturn msg;",
         "outputs": 1,
@@ -563,43 +563,43 @@
         "y": 672,
         "wires": [
             [
-                "76c553c9.564bfc"
+                "bc648a4f.de7dd8"
             ]
         ]
     },
     {
-        "id": "50558231.d94eac",
+        "id": "c7b89ac4.6d9ec8",
         "type": "geohash",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "",
         "property": "payload",
         "x": 722.3238983154297,
         "y": 637.7585391998291,
         "wires": [
             [
-                "dc15fa0a.26ee48",
-                "e64f5699.020718"
+                "33768eb4.6e8932",
+                "3ccfd95c.6787a6"
             ]
         ]
     },
     {
-        "id": "e64f5699.020718",
+        "id": "3ccfd95c.6787a6",
         "type": "geohash",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "",
         "property": "payload",
         "x": 902,
         "y": 624,
         "wires": [
             [
-                "76c553c9.564bfc"
+                "bc648a4f.de7dd8"
             ]
         ]
     },
     {
-        "id": "76c553c9.564bfc",
+        "id": "bc648a4f.de7dd8",
         "type": "debug",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -611,9 +611,9 @@
         "wires": []
     },
     {
-        "id": "3e02b512.44039a",
+        "id": "e644e90d.9ac0f8",
         "type": "random",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "",
         "low": "0",
         "high": "100",
@@ -626,44 +626,30 @@
         ]
     },
     {
-        "id": "2f9dfce3.2963c4",
+        "id": "a9bd06fe.8ab5b8",
         "type": "change",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "",
         "rules": [
             {
                 "t": "set",
                 "p": "influxdbApiWriteUrl",
                 "pt": "msg",
-                "to": "https://db.piyopiyo.takeiteasy.link/write?db=iotstartkit&precision=ms",
+                "to": "INFLUXDB_API_WRITE_URL",
                 "tot": "str"
             },
             {
                 "t": "set",
                 "p": "deliveryStreamName",
                 "pt": "msg",
-                "to": "iot-start-kit-delivery-stream",
+                "to": "DELIVERY_STREAM_NAME",
                 "tot": "str"
             },
             {
                 "t": "set",
                 "p": "streamFunctionName",
                 "pt": "msg",
-                "to": "IoT-Start-Kit-Particle-Function",
-                "tot": "str"
-            },
-            {
-                "t": "set",
-                "p": "dataExpireS",
-                "pt": "msg",
-                "to": "DATA_EXPIRE_S",
-                "tot": "str"
-            },
-            {
-                "t": "set",
-                "p": "streamWindow",
-                "pt": "msg",
-                "to": "STREAM_WINDOW_S",
+                "to": "STREAM_FUNCTION_NAME",
                 "tot": "str"
             }
         ],
@@ -676,51 +662,23 @@
         "y": 224,
         "wires": [
             [
-                "f4fe68a9.bb7f98",
-                "6339f5ea.52410c",
-                "fcbc6146.005e9"
+                "c6181c22.9c2f2",
+                "2296a90b.e6b316",
+                "7deb312e.7a4ce"
             ]
         ]
     },
     {
-        "id": "522e18df.daf638",
+        "id": "9ff07f4a.11175",
         "type": "change",
-        "z": "3bdd7169.8f727e",
+        "z": "1b973239.161ece",
         "name": "",
         "rules": [
             {
                 "t": "set",
                 "p": "binaryBucketName",
                 "pt": "msg",
-                "to": "higuchi-test-to-20180331",
-                "tot": "str"
-            },
-            {
-                "t": "set",
-                "p": "exportCsvBucketName",
-                "pt": "msg",
-                "to": "EXPORT_CSV_BUCKET_NAME",
-                "tot": "str"
-            },
-            {
-                "t": "set",
-                "p": "urlExpireS",
-                "pt": "msg",
-                "to": "URL_EXPIRE_S",
-                "tot": "str"
-            },
-            {
-                "t": "set",
-                "p": "dataExpireS",
-                "pt": "msg",
-                "to": "DATA_EXPIRE_S",
-                "tot": "str"
-            },
-            {
-                "t": "set",
-                "p": "streamWindow",
-                "pt": "msg",
-                "to": "STREAM_WINDOW_S",
+                "to": "BINARY_BUCKET_NAME",
                 "tot": "str"
             }
         ],
@@ -729,25 +687,25 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 304,
+        "x": 344,
         "y": 256,
         "wires": [
             [
-                "1307564a.6e329a"
+                "9bc86b0a.70e678"
             ]
         ]
     },
     {
-        "id": "3c954ed4.32bcc2",
+        "id": "d38f01bf.00fda",
         "type": "change",
-        "z": "3bdd7169.8f727e",
+        "z": "1b973239.161ece",
         "name": "",
         "rules": [
             {
                 "t": "set",
                 "p": "brokerUrl",
                 "pt": "msg",
-                "to": "nodered1201-dev.yzxq2qpgsp.us-east-1.elasticbeanstalk.com",
+                "to": "BROKER_URL",
                 "tot": "str"
             }
         ],
@@ -760,21 +718,21 @@
         "y": 368,
         "wires": [
             [
-                "a95f3d9e.c3962"
+                "312ecd21.e0f082"
             ]
         ]
     },
     {
-        "id": "eef7ec0.4c81118",
+        "id": "d06e5518.f37fd8",
         "type": "change",
-        "z": "7583fe25.07e35",
+        "z": "e7f59f82.7ce1c",
         "name": "",
         "rules": [
             {
                 "t": "set",
                 "p": "url",
                 "pt": "msg",
-                "to": "https://broker.piyopiyo.takeiteasy.link/v1/stream/json",
+                "to": "BROKER_URL/v1/stream/json",
                 "tot": "str"
             }
         ],
@@ -787,7 +745,7 @@
         "y": 624,
         "wires": [
             [
-                "c3dde490.9a9588"
+                "f58b54e.ca6bfa8"
             ]
         ]
     }
