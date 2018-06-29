@@ -435,7 +435,7 @@
         "type": "function",
         "z": "e7f59f82.7ce1c",
         "name": "",
-        "func": "var t = new Date().getTime();\nmsg.value = Number(String(t).slice(8, -1)) / 100 + 20;\nmsg.url = nmsg.url + \"/api/v1/stream/json\";\nreturn msg;",
+        "func": "var t = new Date().getTime();\nmsg.value = Number(String(t).slice(8, -1)) / 100 + 20;\nmsg.url = msg.url + \"/api/v1/stream/json\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 162,
