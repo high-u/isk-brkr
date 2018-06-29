@@ -435,7 +435,7 @@
         "type": "function",
         "z": "e7f59f82.7ce1c",
         "name": "",
-        "func": "var t = new Date().getTime();\nmsg.value = Number(String(t).slice(8, -1)) / 100 + 20;\nmsg.url = \"https://broker.piyopiyo.takeiteasy.link\";\nreturn msg;",
+        "func": "var t = new Date().getTime();\nmsg.value = Number(String(t).slice(8, -1)) / 100 + 20;\nmsg.url = nmsg.url + \"/api/v1/stream/json\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 162,
@@ -732,7 +732,7 @@
                 "t": "set",
                 "p": "url",
                 "pt": "msg",
-                "to": "BROKER_URL/v1/stream/json",
+                "to": "BROKER_URL",
                 "tot": "str"
             }
         ],
