@@ -370,7 +370,7 @@
         "type": "function",
         "z": "e7f59f82.7ce1c",
         "name": "transform",
-        "func": "var time = new Date().getTime();\n\nvar obj = JSON.parse(msg.payload);\nvar fields = \"\";\nvar tags = \"\";\nvar delim = \"\";\nfor (let k in obj) {\n  let v = obj[k];\n  if (typeof v === \"string\") {\n    tags += `,${k}=${v}`;\n  } else {\n    fields += `${delim}${k}=${v}`;\n    delim = \",\";\n  }\n}\n\nvar series = \"devices\";\n\nmsg.payload = `${series}${tags} ${fields} ${time}`;\nmsg.headers = {\"content-type\": \"application/octet-stream\"};\nmsg.url = msg.influxdbApiWriteUrl + \"/write?db=iotstartkit&precision=ms&u=\" + msg.influxdbUsername + \"&p=\" + msg.influxdbPassword;\nreturn msg;",
+        "func": "var time = new Date().getTime();\n\nvar obj = JSON.parse(msg.payload);\nvar fields = \"\";\nvar tags = \"\";\nvar delim = \"\";\nfor (let k in obj) {\n  let v = obj[k];\n  if (typeof v === \"string\") {\n    tags += `,${k}=${v}`;\n  } else {\n    fields += `${delim}${k}=${v}`;\n    delim = \",\";\n  }\n}\n\nvar series = \"devices\";\n\nmsg.payload = `${series}${tags} ${fields} ${time}`;\nmsg.headers = {\"content-type\": \"application/octet-stream\"};\nmsg.url = msg.influxdbApiWriteUrl + \"/write?db=iotstartkit&precision=ms&u=\" + msg.InfluxUser + \"&p=\" + msg.InfluxPassword;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 428,
@@ -650,6 +650,20 @@
                 "p": "streamFunctionName",
                 "pt": "msg",
                 "to": "STREAM_FUNCTION_NAME",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "InfluxUser",
+                "pt": "msg",
+                "to": "INFLUXDB_USERNAME",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "InfluxPassword",
+                "pt": "msg",
+                "to": "INFLUXDB_PASSWORD",
                 "tot": "str"
             }
         ],
