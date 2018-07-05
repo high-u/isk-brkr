@@ -12,7 +12,12 @@
     "node-red-node-geohash": "~0.1.9",
     "node-red-node-random": "~0.1.0",
     "node-red-contrib-aws-sdk-anything": "~0.2.1",
-    "node-red-contrib-http-request": "~0.1.13"
+    "node-red-contrib-http-request": "~0.1.13",
+    "node-red-contrib-credentials": "~0.2.0",
+    "node-red-contrib-msgpack": "^2.0.0",
+    "node-red-contrib-process-env": "^0.2.5",
+    "node-red-contrib-simple-aws-sdk": "0.0.1",
+    "node-red-contrib-simple-sendmail": "^0.1.8"
   },
   "devDependencies": {
   }
